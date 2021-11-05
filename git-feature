@@ -91,7 +91,8 @@ elif [ "$1" == "finish" ] ; then
 	fi
 
 	git push
-	git checkout develop
+	git checkout main
+	git pull
 	git branch -d $CURRENT_BRANCH
 	git push origin --delete $CURRENT_BRANCH
 	echo "  Local branch $CURRENT_BRANCH was deleted."
@@ -99,7 +100,6 @@ elif [ "$1" == "finish" ] ; then
 	
 
 elif [ "$1" == "reset-dev" ] ; then
-	
 	git push
 	git checkout develop
 	git pull
