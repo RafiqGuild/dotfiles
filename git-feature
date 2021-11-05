@@ -5,24 +5,24 @@ CURRENT_REPO=$(basename -s .git `git config --get remote.origin.url`)
 
 if [ "$1" == "help" ] ||  [ "$1" == "" ]; then
 	echo
-    echo "  'git feature start name'   Creates a new feature branch from main called name."
-    echo "  'git feature dev'          Merges the current branch to dev and pushes."
-    echo "  'git feature stage'        Updates your feature branch with changes from main and provides a link to start a PR."
-    echo "  'git feature live'         Checks that the current branch has been merged to staging, "
-    echo "                             merges staging to main, then main to staging, both via Github API."
-    echo "  'git feature finish'       Verifies the current branch is a feature branch, then deletes the current branch locally and remotely."
-    echo
+	echo "  'git feature start name'   Creates a new feature branch from main called name."
+	echo "  'git feature dev'          Merges the current branch to dev and pushes."
+	echo "  'git feature stage'        Updates your feature branch with changes from main and provides a link to start a PR."
+	echo "  'git feature live'         Checks that the current branch has been merged to staging, "
+	echo "                             merges staging to main, then main to staging, both via Github API."
+	echo "  'git feature finish'       Verifies the current branch is a feature branch, then deletes the current branch locally and remotely."
+	echo
 	echo "  'git feature reset-dev'    Reset's the develop branch to the code that is merged into the 'main' branch."
 
 
 elif [ "$1" == "start" ] ; then
-    git checkout main
-    git pull
-    git checkout -b $2
-    git push --set-upstream origin $2
-    echo "The following actions were performed:"
-    echo "  $2 was branched from main."
-    echo "  $2 was pushed to remote repo."
+	git checkout main
+	git pull
+	git checkout -b $2
+	git push --set-upstream origin $2
+	echo "The following actions were performed:"
+	echo "  $2 was branched from main."
+	echo "  $2 was pushed to remote repo."
 
 elif [ "$1" == "dev" ] ; then
 
@@ -38,19 +38,19 @@ elif [ "$1" == "dev" ] ; then
 	echo "  Deployment to the dev environment should have automatically started."
 
 elif [ "$1" == "stage" ] ; then
-    git push
-    git checkout main
-    git pull
-    git checkout $CURRENT_BRANCH
-    git merge --no-edit main
-    git push
-    echo "The following actions were performed:"
-    echo "  Branch main was pulled"
-    echo "  main was merged into $CURRENT_BRANCH"
-    echo "  $CURRENT_BRANCH was pushed"
-    echo
-    echo "You must create a pull request into staging from your feature branch:"
-    echo "https://github.com/GuildEducationInc/""$CURRENT_REPO""/compare/staging...""$CURRENT_BRANCH"
+	git push
+	git checkout main
+	git pull
+	git checkout $CURRENT_BRANCH
+	git merge --no-edit main
+	git push
+	echo "The following actions were performed:"
+	echo "  Branch main was pulled"
+	echo "  main was merged into $CURRENT_BRANCH"
+	echo "  $CURRENT_BRANCH was pushed"
+	echo
+	echo "You must create a pull request into staging from your feature branch:"
+	echo "https://github.com/GuildEducationInc/""$CURRENT_REPO""/compare/staging...""$CURRENT_BRANCH"
 
 elif [ "$1" == "live" ] ; then
 	if [[ -z "${GITHUB_TOKEN}" ]]; then
@@ -75,9 +75,9 @@ elif [ "$1" == "live" ] ; then
 		git checkout main
 		git pull
 		git checkout $CURRENT_BRANCH
-    	echo "The following actions were performed:"
-    	echo "  Branch staging was merged to main."
-    	echo "  Deployment to the production environment should have automatically started."
+		echo "The following actions were performed:"
+		echo "  Branch staging was merged to main."
+		echo "  Deployment to the production environment should have automatically started."
 	else
 		echo "Branch $CURRENT_BRANCH not found on staging and can not be promoted"
 		git checkout $CURRENT_BRANCH
@@ -99,17 +99,17 @@ elif [ "$1" == "finish" ] ; then
 	
 
 elif [ "$1" == "reset-dev" ] ; then
-    
-    git push
-    git checkout develop
-    git pull
-    git reset --hard origin/main
-    git push --force
-    git checkout $CURRENT_BRANCH
-    echo "The following actions were performed:"
-    echo "  develop was reset to origin main."
-    echo "  Branch develop was pushed."
-    echo "  Deployment to the dev environment should have automatically started."
+	
+	git push
+	git checkout develop
+	git pull
+	git reset --hard origin/main
+	git push --force
+	git checkout $CURRENT_BRANCH
+	echo "The following actions were performed:"
+	echo "  develop was reset to origin main."
+	echo "  Branch develop was pushed."
+	echo "  Deployment to the dev environment should have automatically started."
 
 # Use this function as a sandbox to experiment with new commands
 elif [ "$1" == "test" ] ; then
@@ -129,4 +129,3 @@ elif [ "$1" == "test" ] ; then
 	git checkout $CURRENT_BRANCH
 	
 fi
-
