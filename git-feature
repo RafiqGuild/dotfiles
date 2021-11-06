@@ -12,7 +12,7 @@ if [ "$1" == "help" ] ||  [ "$1" == "" ]; then
 	echo "                             merges staging to main, then main to staging, both via Github API."
 	echo "  'git feature finish'       Verifies the current branch is a feature branch, then deletes the current branch locally and remotely."
 	echo
-	echo "  'git feature reset-dev'    Reset's the develop branch to the code that is merged into the 'main' branch."
+	echo "  'git feature reset-dev'    Resets the develop branch to the code that is merged into the 'main' branch."
 
 
 elif [ "$1" == "start" ] ; then
