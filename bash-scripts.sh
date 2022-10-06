@@ -1,6 +1,3 @@
-# external scripts
-source ~/docker-aliases.sh
-
 # aws/sso stuff
 alias dev='aws2-wrap --profile guild-dev'
 alias staging='aws2-wrap --profile guild-staging'
